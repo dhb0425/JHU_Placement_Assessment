@@ -1,4 +1,4 @@
-library(dplyr)
+library(tidyverse)
 library(rvest)
 library(scales)
 
@@ -57,7 +57,7 @@ df_clean <- df_all %>%
 
 
 # Plot death toll by year, colored by disaster Type
-ggplot(df_clean, aes(x = Year, y = death_toll_num, color = Type)) +
+plot <- ggplot(df_clean, aes(x = Year, y = death_toll_num, color = Type)) +
   geom_point(alpha = 0.7) +
   scale_y_continuous(labels = comma) +
   labs(
@@ -69,6 +69,23 @@ ggplot(df_clean, aes(x = Year, y = death_toll_num, color = Type)) +
   theme_minimal()
 
 
+# save as PDF
+ggsave(
+  filename = "question_1_plot.pdf",
+  plot     = plot,
+  device   = "pdf",
+  width    = 12,
+  height   = 6
+)
 
+# save as PNG
+ggsave(
+  filename = "question_1_plot.png",
+  plot     = plot,
+  device   = "png",
+  width    = 12,
+  height   = 6,
+  dpi      = 320
+)
 
 
