@@ -29,7 +29,7 @@ df_21st <- tables[[3]] %>%
 df_all <- bind_rows(df_20th, df_21st)
 
 
-
+write.csv(df_all,file='raw_table.csv', row.names = T)
 
 
 df_clean <- df_all %>%
@@ -55,6 +55,8 @@ df_clean <- df_all %>%
   ) %>%
   select(-`Death tolls`, -dt_clean, -low, -high)
 
+
+write.csv(df_clean,file='cleaned_table.csv', row.names = T)
 
 # Plot death toll by year, colored by disaster Type
 plot <- ggplot(df_clean, aes(x = Year, y = death_toll_num, color = Type)) +
